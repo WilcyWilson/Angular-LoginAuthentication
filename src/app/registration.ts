@@ -1,13 +1,10 @@
-export class Registration{
-  constructor(
-    public id: number,
-    public address: string,
-    public emailId: string,
-    public firstName: string,
-    public lastName: string,
-    public password: string,
-    public phoneNo: string,
-    public userName: string
-  ) {
-  }
+export interface Registration {
+  id: number;
+  address: string;
+  emailId: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  phoneNo: string;
+  userName: string;
 }

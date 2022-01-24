@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {NgForm} from "@angular/forms";
 import { User } from '../user';
 import {RegistrationService} from "../registration.service";
+import {Response} from "../response";
 
 @Component({
   selector: 'app-login',
@@ -10,20 +10,23 @@ import {RegistrationService} from "../registration.service";
 })
 
 export class LoginComponent implements OnInit {
-  myObserver = {
-    next: (x: number) => console.log('Response Received: ' + x),
-    error: (err: Error) => console.error('Observer got an error: ' + err),
-  };
 
-  user = new User();
+  user: User = {
+    userName: "",
+    password: ""
+  }
+  response: Response = {
+    responseStatus: false,
+    responseMessage: "null"
+  }
 
-  constructor(private _service : RegistrationService) { }
+  constructor(private service : RegistrationService) { }
 
   ngOnInit(): void {
   }
 
   loginUser(){
-    this._service.loginUserFromRemote(this.user).subscribe(this.myObserver);
+    this.service.loginUserFromRemote(this.user).subscribe(response => {this.response = response;});
   }
 
 }

@@ -1,6 +1,6 @@
 <div class="container">
 <h2>Login Form:</h2>
-<form #loginform="ngForm" (ngSubmit)="loginUser()">
+<form (ngSubmit)="loginUser()">
   <div class="form-group">
     <label for="username">Username</label>
     <input type="text" class="form-control" id="username" placeholder="Enter username" [(ngModel)]="user.userName" name="username">
@@ -11,4 +11,6 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+  <h3>{{response.responseMessage}}</h3>
+  <h3>{{response.responseStatus}}</h3>
 </div>
