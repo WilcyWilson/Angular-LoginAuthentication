@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import {RegistrationService} from "../registration.service";
 import {Response} from "../response";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -20,13 +21,20 @@ export class LoginComponent implements OnInit {
     responseMessage: "null"
   }
 
-  constructor(private service : RegistrationService) { }
+  submitted = false;
+
+  constructor(private service : RegistrationService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   loginUser(){
-    this.service.loginUserFromRemote(this.user).subscribe(response => {this.response = response;});
+    this.submitted = true;
+    this.service.loginUserFromRemote(this.user).subscribe(response => {this.response = response;
+    if(response.responseStatus){
+      this.router.navigate(['/welcome']).then(() => {
+      })
+    }
+    });
   }
-
 }

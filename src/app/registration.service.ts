@@ -4,12 +4,14 @@ import {Observable, of} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { catchError, map, tap } from 'rxjs/operators';
 import {Response} from "./response";
+import {Registration} from "./registration";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationService {
   private checkUserUrl = "http://localhost:8080/checkUser";
+  private registerUserUrl = "http://localhost:8080/registerUser"
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -38,6 +40,14 @@ export class RegistrationService {
 
   loginUserFromRemote(user: User): Observable<Response> {
     return this.http.post<Response>(this.checkUserUrl, user, this.httpOptions).pipe(
+      tap((response: Response) => this.log(`Response Status =${response.responseStatus} and
+      Response Message=${response.responseMessage}`)),
+      catchError(this.handleError<Response>('loginUserFromRemote'))
+    );
+  }
+
+  registerUserFromRemote(registration: Registration): Observable<Response> {
+    return this.http.post<Response>(this.registerUserUrl, registration, this.httpOptions).pipe(
       tap((response: Response) => this.log(`Response Status =${response.responseStatus} and
       Response Message=${response.responseMessage}`)),
       catchError(this.handleError<Response>('loginUserFromRemote'))
