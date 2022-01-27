@@ -1,1 +1,24 @@
-<h1>Welcome to the good night !!!</h1>
+<div class="container">
+  <table class="table mt-4">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th scope="col">Created By</th>
+      <th scope="col">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let login of logins">
+      <tr [class.table-danger]="!login.status" [class.table-success]="login.status">
+        <td>{{login.id}}</td>
+        <td>{{login.userName}}</td>
+        <td>{{login.emailId}}</td>
+        <td>{{login.createdBy}}</td>
+        <td>{{login.status}}</td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
