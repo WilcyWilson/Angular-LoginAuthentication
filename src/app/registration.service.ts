@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {User} from "./user";
 import {Observable, of} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import { catchError, map, tap } from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {Response} from "./response";
 import {Registration} from "./registration";
 import {Login} from "./login";
@@ -16,7 +16,7 @@ export class RegistrationService {
   private getDataUrl = "http://localhost:8080/getData";
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
   constructor(private http: HttpClient) {
@@ -56,8 +56,8 @@ export class RegistrationService {
     );
   }
 
-  getDataFromRemote(): Observable<Login[]> {
-    return this.http.get<Login[]>(this.getDataUrl, this.httpOptions).pipe(
+  getDataFromRemote(params: any): Observable<any> {
+    return this.http.get<any>(this.getDataUrl, {params}).pipe(
       tap(_ => this.log('fetched data')),
       catchError(this.handleError<Login[]>('getDataFromRemote'))
     );

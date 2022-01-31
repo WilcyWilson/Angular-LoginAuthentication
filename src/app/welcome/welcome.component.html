@@ -3,7 +3,7 @@
     Total User Count:
   </div>
   <div class="badge bg-primary fs-5 m-2">
-    {{logins.length}}
+    {{count}}
   </div>
   <div class="float-end m-2">
   <a routerLink="/registration"><button class="btn btn-success">Create</button></a>
@@ -19,7 +19,10 @@
     </tr>
     </thead>
     <tbody>
-    <ng-container *ngFor="let login of logins">
+    <ng-container *ngFor="let login of logins | paginate : {
+        itemsPerPage: pageSize,
+        currentPage: page,
+        totalItems: count};">
       <tr [class.table-danger]="!login.status" [class.table-success]="login.status">
         <td>{{login.id}}</td>
         <td>{{login.userName}}</td>
@@ -30,4 +33,12 @@
     </ng-container>
     </tbody>
   </table>
+  <div class="col-md-12">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      [responsive]="true"
+      (pageChange)="handlePageChange($event)"
+    ></pagination-controls>
+  </div>
 </div>

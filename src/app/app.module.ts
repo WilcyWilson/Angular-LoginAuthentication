@@ -8,19 +8,21 @@ import { RegistrationComponent } from './registration/registration.component';
 import {HttpClientModule} from "@angular/common/http";
 import {LoginComponent} from "./login/login.component";
 import { WelcomeComponent } from './welcome/welcome.component';
+import { NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    WelcomeComponent
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
