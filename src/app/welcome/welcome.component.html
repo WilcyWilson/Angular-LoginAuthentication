@@ -10,33 +10,6 @@
       <button class="btn btn-success">Create</button>
     </a>
   </div>
-  <!--  <div class="col-md-4">-->
-  <!--    <label>Email: </label>-->
-  <!--    <div class="input-group mb-3">-->
-  <!--      <input-->
-  <!--        type="text"-->
-  <!--        class="form-control"-->
-  <!--        placeholder="Search by Email"-->
-  <!--        [(ngModel)]="email"-->
-  <!--      />-->
-  <!--      <label>Username: </label>-->
-  <!--      <div class="input-group mb-3">-->
-  <!--        <input-->
-  <!--          type="text"-->
-  <!--          class="form-control"-->
-  <!--          placeholder="Search by Email"-->
-  <!--          [(ngModel)]="email"-->
-  <!--        />-->
-  <!--      <button-->
-  <!--        class="btn btn-success"-->
-  <!--        type="button"-->
-  <!--        id="email"-->
-  <!--        (click)="search()">-->
-  <!--        Search-->
-  <!--      </button>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--  <div>-->
   <h4 class="mt-4">Filter By:</h4>
   <form (ngSubmit)="search()">
     <div class="row">
@@ -84,7 +57,7 @@
       <tr [class.table-danger]="!login.status" [class.table-success]="login.status">
         <td>{{login.id}}</td>
         <td>{{login.userName}}</td>
-        <td>{{login.emailId}}</td>
+        <td>{{login.email}}</td>
         <td>{{login.createdBy}}</td>
         <td>{{login.status}}</td>
       </tr>

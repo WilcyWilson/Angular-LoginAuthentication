@@ -56,9 +56,9 @@ export class WelcomeComponent implements OnInit {
     }
 
     if (status == 2) {
-      params[`status`] = true;
+      params[`status`] = 1;
     } else if (status == 3){
-      params[`status`] = false;
+      params[`status`] = 0;
     }
 
     if (createdBy) {

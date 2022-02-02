@@ -1,7 +1,7 @@
 export interface Login {
   id: string;
   userName: string;
-  emailId: string;
+  email: string;
   createdBy: string;
   status: string;
 }
