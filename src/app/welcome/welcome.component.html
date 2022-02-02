@@ -6,8 +6,66 @@
     {{count}}
   </div>
   <div class="float-end m-2">
-  <a routerLink="/registration"><button class="btn btn-success">Create</button></a>
+    <a routerLink="/registration">
+      <button class="btn btn-success">Create</button>
+    </a>
   </div>
+  <!--  <div class="col-md-4">-->
+  <!--    <label>Email: </label>-->
+  <!--    <div class="input-group mb-3">-->
+  <!--      <input-->
+  <!--        type="text"-->
+  <!--        class="form-control"-->
+  <!--        placeholder="Search by Email"-->
+  <!--        [(ngModel)]="email"-->
+  <!--      />-->
+  <!--      <label>Username: </label>-->
+  <!--      <div class="input-group mb-3">-->
+  <!--        <input-->
+  <!--          type="text"-->
+  <!--          class="form-control"-->
+  <!--          placeholder="Search by Email"-->
+  <!--          [(ngModel)]="email"-->
+  <!--        />-->
+  <!--      <button-->
+  <!--        class="btn btn-success"-->
+  <!--        type="button"-->
+  <!--        id="email"-->
+  <!--        (click)="search()">-->
+  <!--        Search-->
+  <!--      </button>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <div>-->
+  <h4 class="mt-4">Filter By:</h4>
+  <form (ngSubmit)="search()">
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" class="form-control" [(ngModel)]="userName"
+               name="username">
+      </div>
+      <div class="form-group col-md-3 mb-3">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" [(ngModel)]="email"
+               name="email">
+      </div>
+      <div class="form-group col-md-3 mb-3">
+        <label for="createdBy">Created By</label>
+        <input type="text" class="form-control" id="createdBy" [(ngModel)]="createdBy"
+               name="createdBy">
+      </div>
+      <div class="form-group col-md-3 mb-3 mt-4">
+        <label class="m-lg-2">Status: </label>
+        <select [(ngModel)]="status" name="status">
+          <option [selected]="true" [value]="1" selected="selected">All</option>
+          <option [value]="2">True</option>
+          <option [value]="3">False</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success mt-2">Search</button>
+  </form>
   <table class="table mt-4">
     <thead class="table-dark">
     <tr>
@@ -42,3 +100,4 @@
     ></pagination-controls>
   </div>
 </div>
+<!--</div>-->

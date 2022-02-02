@@ -11,6 +11,10 @@ export class WelcomeComponent implements OnInit {
   page = 1;
   pageSize = 5;
   count = 0;
+  email="";
+  userName="";
+  createdBy="";
+  status=1;
 
   logins: Login[] = [];
 
@@ -21,7 +25,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   getData():void{
-    const params = this.getRequestParams(this.page, this.pageSize);
+    const params = this.getRequestParams(this.email, this.userName, this.createdBy, this.status, this.page, this.pageSize);
     this.service.getDataFromRemote(params).subscribe(response => {
       const { logins, totalItems } = response;
       this.logins = logins;
@@ -35,8 +39,31 @@ export class WelcomeComponent implements OnInit {
     this.getData();
   }
 
-  getRequestParams(page: number, pageSize: number): any {
+  search(): void {
+    this.page = 1;
+    this.getData();
+  }
+
+  getRequestParams(email: string, userName: string, createdBy: string, status: number, page: number, pageSize: number): any {
     let params: any = {};
+
+    if (email) {
+      params[`email`] = email;
+    }
+
+    if (userName) {
+      params[`userName`] = userName;
+    }
+
+    if (status == 2) {
+      params[`status`] = true;
+    } else if (status == 3){
+      params[`status`] = false;
+    }
+
+    if (createdBy) {
+      params[`createdBy`] = createdBy;
+    }
 
     if (page) {
       params[`page`] = page - 1;
