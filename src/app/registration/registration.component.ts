@@ -21,7 +21,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   response: Response = {
-    responseStatus: false,
+    responseStatus: true,
     responseMessage: "null"
   }
 

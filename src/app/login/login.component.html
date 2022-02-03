@@ -3,7 +3,7 @@
     <form (ngSubmit)="loginUser()" #loginForm="ngForm">
       <div class="form-group col-md-3">
         <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" class="form-control" placeholder="Enter username" [(ngModel)]="user.userName"
+        <input type="text" class="form-control" id="username" placeholder="Enter username" [(ngModel)]="user.userName"
                name="username" required #userName="ngModel">
         <div [hidden]="userName.valid || userName.pristine"
              class="alert alert-danger">
@@ -22,7 +22,7 @@
       <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
       <a routerLink="/registration"><button class="btn btn-primary m-3">Registration</button></a>
     </form>
-  <div [hidden]="response.responseStatus || !submitted"
+  <div [hidden]="response.responseStatus"
        class="alert alert-danger">
     {{response.responseMessage}}
   </div>
