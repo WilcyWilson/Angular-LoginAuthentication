@@ -6,6 +6,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {Response} from "./response";
 import {Registration} from "./registration";
 import {Login} from "./login";
+import {Approve} from "./approve";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class RegistrationService {
   private checkUserUrl = "http://localhost:8080/checkUser";
   private registerUserUrl = "http://localhost:8080/registerUser";
   private getDataUrl = "http://localhost:8080/getData";
+  private checkApprovalUrl = "http://localhost:8080/checkApproval"
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -45,6 +47,14 @@ export class RegistrationService {
       tap((response: Response) => this.log(`Response Status =${response.responseStatus} and
       Response Message=${response.responseMessage}`)),
       catchError(this.handleError<Response>('loginUserFromRemote'))
+    );
+  }
+
+  blockUnblockFromRemote(approve: Approve): Observable<Response> {
+    return this.http.post<Response>(this.checkApprovalUrl, approve, this.httpOptions).pipe(
+      tap((response: Response) => this.log(`Response Status =${response.responseStatus} and
+      Response Message=${response.responseMessage}`)),
+      catchError(this.handleError<Response>('blockUnblockFromRemote'))
     );
   }
 

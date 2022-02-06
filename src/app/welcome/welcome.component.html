@@ -58,7 +58,26 @@
         currentPage: page,
         totalItems: count};">
       <tr [class.table-danger]="!login.status" [class.table-success]="login.status">
-        <td>{{login.id}}</td>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+              Action
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">View</a></li>
+              <li><a class="dropdown-item" href="#">Edit</a></li>
+              <li>
+                <div *ngIf="login.status">
+                  <a class="dropdown-item" (click)="checkBlockStatus(login.userName)">Block</a>
+                </div>
+                <div *ngIf="!login.status">
+                <a class="dropdown-item" (click)="checkBlockStatus(login.userName)">Activate</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </td>
         <td>{{login.userName}}</td>
         <td>{{login.email}}</td>
         <td>{{login.createdBy}}</td>
