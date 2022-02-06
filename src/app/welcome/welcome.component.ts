@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Login} from "../login";
 import {RegistrationService} from "../registration.service";
+import {MessageService} from "../message.service";
 
 @Component({
   selector: 'app-welcome',
@@ -16,12 +17,17 @@ export class WelcomeComponent implements OnInit {
   createdBy="";
   status=1;
 
+  user = "";
+
   logins: Login[] = [];
 
-  constructor(private service : RegistrationService) { }
+  constructor(private service : RegistrationService, private messageService: MessageService) {
+
+  }
 
   ngOnInit(): void {
     this.getData();
+    this.user = this.messageService.getUserName();
   }
 
   getData():void{

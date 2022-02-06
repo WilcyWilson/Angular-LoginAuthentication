@@ -7,8 +7,11 @@
   </div>
   <div class="float-end m-2">
     <a routerLink="/registration">
-      <button class="btn btn-success">Create</button>
+      <button class="btn btn-success me-3">Create</button>
     </a>
+    <div class="badge bg-primary fs-5 fw-normal">
+      Namaste {{user}}
+    </div>
   </div>
   <h4 class="mt-4">Filter By:</h4>
   <form (ngSubmit)="search()">
