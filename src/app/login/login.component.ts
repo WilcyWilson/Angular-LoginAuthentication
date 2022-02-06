@@ -3,7 +3,6 @@ import { User } from '../user';
 import {RegistrationService} from "../registration.service";
 import {Response} from "../response";
 import {Router} from "@angular/router";
-import {Message} from "@angular/compiler/src/i18n/i18n_ast";
 import {MessageService} from "../message.service";
 
 @Component({
