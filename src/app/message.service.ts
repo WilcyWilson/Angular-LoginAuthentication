@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Subject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
-  private userName = "";
+  private userName : any;
 
   constructor() { }
 
@@ -15,5 +14,9 @@ export class MessageService {
 
   public getUserName() : string{
     return this.userName;
+  }
+
+  public hasUserName(){
+    return this.userName && this.userName.length;
   }
 }

@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     this.service.loginUserFromRemote(this.user).subscribe(response => {
       this.response = response;
-      this.messageService.setUserName(this.user.userName);
     if(response.responseStatus){
+      this.messageService.setUserName(this.user.userName);
       this.router.navigate(['/welcome']).then(() => {
       })
     }

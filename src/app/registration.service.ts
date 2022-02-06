@@ -16,6 +16,7 @@ export class RegistrationService {
   private registerUserUrl = "http://localhost:8080/registerUser";
   private getDataUrl = "http://localhost:8080/getData";
   private checkApprovalUrl = "http://localhost:8080/checkApproval"
+  private blockApprovalUrl = "http://localhost:8080/blockApproval"
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -50,11 +51,19 @@ export class RegistrationService {
     );
   }
 
-  blockUnblockFromRemote(approve: Approve): Observable<Response> {
+  unblockFromRemote(approve: Approve): Observable<Response> {
     return this.http.post<Response>(this.checkApprovalUrl, approve, this.httpOptions).pipe(
       tap((response: Response) => this.log(`Response Status =${response.responseStatus} and
       Response Message=${response.responseMessage}`)),
-      catchError(this.handleError<Response>('blockUnblockFromRemote'))
+      catchError(this.handleError<Response>('unblockFromRemote'))
+    );
+  }
+
+  blockFromRemote(approve: Approve): Observable<Response> {
+    return this.http.post<Response>(this.blockApprovalUrl, approve, this.httpOptions).pipe(
+      tap((response: Response) => this.log(`Response Status =${response.responseStatus} and
+      Response Message=${response.responseMessage}`)),
+      catchError(this.handleError<Response>('unblockFromRemote'))
     );
   }
 

@@ -9,6 +9,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {LoginComponent} from "./login/login.component";
 import { WelcomeComponent } from './welcome/welcome.component';
 import { NgxPaginationModule} from "ngx-pagination";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { NgxPaginationModule} from "ngx-pagination";
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

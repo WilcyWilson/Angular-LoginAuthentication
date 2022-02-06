@@ -4,6 +4,7 @@ import {RegistrationService} from "../registration.service";
 import {MessageService} from "../message.service";
 import {Approve} from "../approve";
 import {Response} from "../response";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-welcome',
@@ -19,12 +20,12 @@ export class WelcomeComponent implements OnInit {
   page = 1;
   pageSize = 5;
   count = 0;
-  email="";
-  userName="";
-  createdBy="";
-  status=1;
+  email = "";
+  userName = "";
+  createdBy = "";
+  status = 1;
 
-  user = "";
+  user: any;
 
   logins: Login[] = [];
 
@@ -33,35 +34,74 @@ export class WelcomeComponent implements OnInit {
     destinationUser: ""
   }
 
-  constructor(private service : RegistrationService, private messageService: MessageService) {
+  constructor(private service: RegistrationService, private messageService: MessageService, private toastr: ToastrService) {
 
   }
 
   ngOnInit(): void {
     this.getData();
-    this.user = this.messageService.getUserName();
+    if (this.messageService.hasUserName()) {
+      this.user = this.messageService.getUserName();
+      localStorage.setItem('user', this.user);
+    } else {
+      this.user = localStorage.getItem('user');
+    }
   }
 
-  getData():void{
+  getData(): void {
     const params = this.getRequestParams(this.email, this.userName, this.createdBy, this.status, this.page, this.pageSize);
     this.service.getDataFromRemote(params).subscribe(response => {
-      const { logins, totalItems } = response;
+      const {logins, totalItems} = response;
       this.logins = logins;
       this.count = totalItems;
       console.log(response);
     });
   }
 
-  checkBlockStatus(userName: string): void {
+  unblock(userName: string): void {
     this.approve.approver = this.user;
     this.approve.destinationUser = userName;
-    this.service.blockUnblockFromRemote(this.approve).subscribe(response => {
+    this.service.unblockFromRemote(this.approve).subscribe(response => {
       this.response = response;
-      if(response.responseStatus){
-            console.log("success");
+      if (response.responseStatus) {
+        console.log("success");
+        this.toastr.success(userName + " successfully activated.", this.response.responseMessage, {
+          positionClass: 'toast-top-center'
+        });
+        setTimeout(()=>{
+          location.reload();
+        }, 1500);
+      } else {
+        console.log("failure");
+        this.toastr.error(this.response.responseMessage, String(this.response.responseStatus), {
+          positionClass: 'toast-top-center'
+        });
       }
     });
-}
+  }
+
+
+  block(userName: string): void {
+    this.approve.approver = this.user;
+    this.approve.destinationUser = userName;
+    this.service.blockFromRemote(this.approve).subscribe(response => {
+      this.response = response;
+      if (response.responseStatus) {
+        console.log("success");
+        this.toastr.success(userName + " successfully blocked.", this.response.responseMessage, {
+          positionClass: 'toast-top-center'
+        });
+        setTimeout(()=>{                           // <<<---using ()=> syntax
+          location.reload();
+        }, 1500);
+      } else {
+        console.log("failure");
+        this.toastr.error(this.response.responseMessage, String(this.response.responseStatus), {
+          positionClass: 'toast-top-center',
+        });
+      }
+    });
+  }
 
   handlePageChange(event: number): void {
     this.page = event;
@@ -86,7 +126,7 @@ export class WelcomeComponent implements OnInit {
 
     if (status == 2) {
       params[`status`] = 1;
-    } else if (status == 3){
+    } else if (status == 3) {
       params[`status`] = 0;
     }
 
